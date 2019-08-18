@@ -24,24 +24,26 @@ img {
 	width: 45%;
 }
 
+button {
+	height: 50px;
+	width: 100%;
+}
+
+h2 {
+	color: whitesmoke;
+}
 /* class selectors by page order, top down*/
 
 .flex {
 	display: flex;
 }
 
-.p1-article {
-	
-}
-
-.p1-back-img {
-	/* margin: 5% 11%; */
-}
-
-.p2-back-img {
-	/* margin: 5% 11%; */
-}
-
 .p2-article {
 	justify-content: flex-end;
+}
+
+.buttons-container {
+	align-items: center;
+  flex-wrap: wrap;
+	width: 15%
 }
