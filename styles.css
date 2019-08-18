@@ -1,0 +1,47 @@
+/* element selectors by page order, top down */
+
+body {
+    background-color: black;
+}
+
+header {
+	color: whitesmoke;
+	text-align: center;
+	width: 100%;
+}
+
+main {
+	width: 100%;
+}
+
+article {
+	flex-wrap: wrap;
+	width: 49%;
+}
+
+img {
+	margin: 5% 11%;
+	width: 45%;
+}
+
+/* class selectors by page order, top down*/
+
+.flex {
+	display: flex;
+}
+
+.p1-article {
+	
+}
+
+.p1-back-img {
+	/* margin: 5% 11%; */
+}
+
+.p2-back-img {
+	/* margin: 5% 11%; */
+}
+
+.p2-article {
+	justify-content: flex-end;
+}
