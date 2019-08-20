@@ -1,4 +1,4 @@
-// all cards as objects
+// array of all cards as objects
 
 const fullDeck = [
 	{
@@ -123,5 +123,18 @@ const fullDeck = [
 	},
 ];
 
-console.log(fullDeck);
+// queries
 
+const fightButton = $("#fight-button-id");
+const newButton = $("#new-button-id");
+const p1BackImg = $("#p1-back-img-id");
+const p2BackImg = $("#p2-back-img-id");
+const p1RecentlyWonImg = $("p1-recently-won-id");
+const p2RecentlyWonImg = $("p2-recently-won-id");
+
+
+// separate all cards into two array's on page load
+
+$(document).ready(function() {
+	
+});
