@@ -89,13 +89,13 @@ const fullDeck = [
 		name: "Lumingrid Warden",
 		power: 1,
 		toughness: 3,
-		number: 15,
+		number: 14,
 	},
 	{
 		name: "Mass of Ghouls",
 		power: 2,
 		toughness: 1,
-		number: 14,
+		number: 15,
 	},
 	{
 		name: "Omega Myr",
@@ -134,89 +134,100 @@ const p2BackImg = $("#p2-back-img-id");
 const p1RecentlyWonImg = $("#p1-recently-won-img-id");
 const p2RecentlyWonImg = $("#p2-recently-won-img-id");
 
-// array for p1 creature and p2 creature cards while fighting
-let tempFightArray = [];
+// array for creature cards while fighting
+const tempFightArray = [];
+
+// array of numbers to pick from randomly
+const originalNumArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+
+const tempWarPile = [];
 
 // arrays for each players cards won
-const p1Winners = [];
-const p2Winners = [];
+let p1Winners = [];
+let p2Winners = [];
+
 
 // event handlers
 startGameButton.on('click', function() {
-	matchNumber1();
-	matchNumber2();
-	console.log(tempFightArray);
-	console.log(fullDeck);
+	matchNumbers();
 });
+
 fightButton.on('click', compareCreatures);
 
-// creates a random # for both players
-	let ranNum1 = Math.floor(Math.random() * Math.floor(20));
-	let ranNum2 = Math.floor(Math.random() * Math.floor(20));
-	console.log(ranNum1,ranNum2);
+// shuffles all the elements of the original number array
+function shuffle1(a) {
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[a[i], a[j]] = [a[j], a[i]];
+	}
+	return a;
+}
 
 // compares the random #s to the cards in fullDeck array and puts the two #s into the tempFightArray, 
 // also removes those cards from the full deck array
 
-function matchNumber1() {
-	ifSame();
-	var p1Card = fullDeck.filter(num1 => num1.number === ranNum1);
-	tempFightArray.push(p1Card);
-	var p1CardIndex = fullDeck.findIndex(ind => ind.number === ranNum1);
-	fullDeck.splice(p1CardIndex, 1);
-}
+function matchNumbers() {
+	shuffle1(originalNumArray);
+	let ranNum1 = originalNumArray.pop();
+	let ranNum2 = originalNumArray.pop();
 
-function matchNumber2() {
-	ifSame();
-	var p2Card = fullDeck.filter(num2 => num2.number === ranNum2);
-	var p2CardIndex = fullDeck.findIndex(ind2 => ind2.number === ranNum2);
-	tempFightArray.push(p2Card);
-	fullDeck.splice(p2CardIndex,1);
-}
-
-// adds 1 to ranNum1 if both random #s are same
-
-function ifSame() {
 	if (ranNum1 === ranNum2) {
-		let ranNum1 = ranNum1 +1;
-	} 
+		ranNum1 = ranNum1 +1;
+	 } 
+	let p1Card = fullDeck.find(num1 => num1.number === ranNum1);
+	tempFightArray.push(p1Card);
+	let p1CardIndex = fullDeck.findIndex(ind => ind.number === ranNum1);
+	fullDeck.splice(p1CardIndex, 1);
+	let p2Card = fullDeck.find(num2 => num2.number === ranNum2);
+	tempFightArray.push(p2Card);
+	let p2CardIndex = fullDeck.findIndex(ind2 => ind2.number === ranNum2);
+	fullDeck.splice(p2CardIndex,1);
+	originalNumArray.forEach(function(subNum) {
+		if (subNum === p1Card.number) {
+			originalNumArray.splice(subNum,1);
+		}
+		if (subNum === p2Card.number) {
+			originalNumArray.splice(subNum,1);
+		}
+	});
 }
 
 // compares power and toughness of each creature in tempFightArray and 
 
 function compareCreatures() {
-	// console.log(tempFightArray,fullDeck);
-	// console.log(tempFightArray[0].power,tempFightArray[0].toughness,tempFightArray[1].power,tempFightArray[1].toughness);
-	let counter = 0;
-	const tempWarPile = [];
-	if (tempFightArray[0].power >= tempFightArray[1].toughness & tempFightArray[1].power < tempFightArray[0].toughness ) {
-		p1Winners.push(tempFightArray[0]);
-		p1Winners.push(tempFightArray[1]);
-		tempFightArray.splice(0,2);
-		// ranNum1 = Math.floor(Math.random() * Math.floor(20));
-		// ranNum2 = Math.floor(Math.random() * Math.floor(20));
-		// matchNumber1();
-		// matchNumber2();
-	} else if (tempFightArray[1].power > tempFightArray[0].toughness & tempFightArray[0].power < tempFightArray[1].toughness) {
-		p2Winners.push(tempFightArray[0]);
-		p2Winners.push(tempFightArray[1]);
-		tempFightArray.splice(0,2);
-		// ranNum1 = Math.floor(Math.random() * Math.floor(20));
-		// ranNum2 = Math.floor(Math.random() * Math.floor(20));
-		// matchNumber1();
-		// matchNumber2();
-
+	if (tempFightArray[0].power >= tempFightArray[1].toughness) {
+		p1IsWinner();
+		matchNumbers();
+	} else if (tempFightArray[1].power >= tempFightArray[0].toughness) {
+		p2IsWinner();
+		matchNumbers();
 	} else {
-		tempWarPile.push(tempFightArray[0]);
-		tempWarPile.push(tempFightArray[1]);
-		tempFightArray.slice(0,2);
-		// ranNum1 = Math.floor(Math.random() * Math.floor(20));
-		// ranNum2 = Math.floor(Math.random() * Math.floor(20));
-		// matchNumber1();
-		// matchNumber2();
+		whenWARhappens();
+		matchNumbers();
 	}
-	console.log(p1Winners,p2Winners);
-	console.log(tempFightArray);
+}
+
+// when p1 wins
+function p1IsWinner() {
+	p1Winners.push(tempFightArray[0]);
+	p1Winners.push(tempFightArray[1]);
+	tempFightArray.splice(0,2);
+	p1Winners = p1Winners.concat(tempWarPile);
+}
+
+// when p2 wins
+function p2IsWinner() {
+	p2Winners.push(tempFightArray[0]);
+	p2Winners.push(tempFightArray[1]);
+	tempFightArray.splice(0,2);
+	p2Winners = p2Winners.concat(tempWarPile);
+}
+// what happens when there is WAR!
+
+function whenWARhappens() {
+	tempWarPile.push(tempFightArray[0]);
+	tempWarPile.push(tempFightArray[1]);
+	tempFightArray.splice(0,2);
 }
 
 // displays image of recently won card
