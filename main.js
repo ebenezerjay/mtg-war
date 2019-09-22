@@ -121,14 +121,133 @@ const fullDeck = [
 		toughness: 4,
 		number: 19,
 	},
+	{
+		name: "Ancient Crab",
+		power: 1,
+		toughness: 5,
+		number: 20,
+	},
+	{
+		name: "Canopy Gorger",
+		power: 6,
+		toughness: 5,
+		number: 21,
+	},
+	{
+		name: "Axebane Stag",
+		power: 6,
+		toughness: 7,
+		number: 22,
+	},
+	{
+		name: "Catacomb Slug",
+		power: 2,
+		toughness: 6,
+		number: 23,
+	},{
+		name: "Cobblebrute",
+		power: 5,
+		toughness: 2,
+		number: 24,
+	},
+	{
+		name: "Golgari Longlegs",
+		power: 5,
+		toughness: 4,
+		number: 25,
+	},
+	{
+		name: "Coral Merfolk",
+		power: 2,
+		toughness: 1,
+		number: 26,
+	},
+	{
+		name: "Craw Wurm",
+		power: 6,
+		toughness: 4,
+		number: 27,
+	},
+	{
+		name: "Elite Vanguard",
+		power: 2,
+		toughness: 1,
+		number: 28,
+	},
+	{
+		name: "Horned Turtle",
+		power: 1,
+		toughness: 4,
+		number: 29,
+	},
+	{
+		name: "Runeclaw Bear",
+		power: 2,
+		toughness: 2,
+		number: 30,
+	},
+	{
+		name: "Seige Mastadon",
+		power: 3,
+		toughness: 5,
+		number: 31,
+	},
+	{
+		name: "Silvercoat Lion",
+		power: 2,
+		toughness: 2,
+		number: 32,
+	},
+	{
+		name: "Giant Octopus",
+		power: 3,
+		toughness: 3,
+		number: 33,
+	},
+	{
+		name: "Warpath Ghoul",
+		power: 3,
+		toughness: 2,
+		number: 34,
+	},
+	{
+		name: "Zombie Goliath",
+		power: 4,
+		toughness: 3,
+		number: 35,
+	},
+	{
+		name: "Balduvian Barbarians",
+		power: 3,
+		toughness: 2,
+		number: 36,
+	},
+	{
+		name: "Coral Eel",
+		power: 2,
+		toughness: 1,
+		number: 37,
+	},
+	{
+		name: "Eager Cadet",
+		power: 1,
+		toughness: 1,
+		number: 38,
+	},
+	{
+		name: "Giant Cockroach",
+		power: 4,
+		toughness: 2,
+		number: 39,
+	},
 ];
-console.log(fullDeck);
+// console.log(fullDeck);
 
 // queries
-
 const startGameButton = $("#start-button-id");
 const fightButton = $("#fight-button-id");
-const newButton = $("#new-button-id");
+const newGameButton = $("#new-game-button-id");
+// const nextRoundButton = $("#next-round-button-id");
 const p1BackImg = $("#p1-back-img-id");
 const p2BackImg = $("#p2-back-img-id");
 const p1RecentlyWonImg = $("#p1-recently-won-img-id");
@@ -137,94 +256,109 @@ const p2RecentlyWonImg = $("#p2-recently-won-img-id");
 // array for creature cards while fighting
 const tempFightArray = [];
 
-// array of numbers to pick from randomly
-const originalNumArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
-
+// array for creatures to be temporarilly held while WAR! is happening
 const tempWarPile = [];
 
 // arrays for each players cards won
-let p1Winners = [];
-let p2Winners = [];
+let p1RoundWinners = [];
+let p1Deck = [];
+let p2RoundWinners = [];
+let p2Deck = [];
 
 
 // event handlers
 startGameButton.on('click', function() {
+	splitFull();
 	matchNumbers();
 });
 
-fightButton.on('click', compareCreatures);
+fightButton.on('click', function() {
+	// if (p1Deck.length === 0 ) {
+	// 	newRoundAlert();
+	// }
+	compareCreatures();
+});
 
-// shuffles all the elements of the original number array
-function shuffle1(a) {
-	for (let i = a.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[a[i], a[j]] = [a[j], a[i]];
+// nextRoundButton.on('click', function() {
+// 	tempFightArray.splice(0,2);
+// 	resetPiles();
+// })
+
+newGameButton.on('click', function() {
+	resetGame();
+})
+
+// shuffles all the elements of the decks (Fisher Yates shuffle algorithm)
+function shuffle1(deck) {
+	for (let i = deck.length - 1; i > 0; i--) {
+		const ranNum = Math.floor(Math.random() * (i + 1));
+		[deck[i], deck[ranNum]] = [deck[ranNum], deck[i]];
 	}
-	return a;
+	return deck;
 }
 
-// compares the random #s to the cards in fullDeck array and puts the two #s into the tempFightArray, 
+// splits full deck randomly into two halves for both players
+function splitFull() {
+	shuffle1(fullDeck);
+	p1Deck = fullDeck.splice(0,20);
+	p2Deck = p2Deck.concat(fullDeck);
+}
+
+// creates and compares the random #s to the cards in fullDeck array and puts the two #s into the tempFightArray, 
 // also removes those cards from the full deck array
 
 function matchNumbers() {
-	shuffle1(originalNumArray);
-	let ranNum1 = originalNumArray.pop();
-	let ranNum2 = originalNumArray.pop();
+	let ranCard1;
+	let ranCard2;
+	resetPiles(ranCard1,ranCard2);
+	ranCard1 = p1Deck.pop();
+	ranCard2 = p2Deck.pop();
+	tempFightArray.push(ranCard1);
+	tempFightArray.push(ranCard2);
+}
 
-	if (ranNum1 === ranNum2) {
-		ranNum1 = ranNum1 +1;
-	 } 
-	let p1Card = fullDeck.find(num1 => num1.number === ranNum1);
-	tempFightArray.push(p1Card);
-	let p1CardIndex = fullDeck.findIndex(ind => ind.number === ranNum1);
-	fullDeck.splice(p1CardIndex, 1);
-	let p2Card = fullDeck.find(num2 => num2.number === ranNum2);
-	tempFightArray.push(p2Card);
-	let p2CardIndex = fullDeck.findIndex(ind2 => ind2.number === ranNum2);
-	fullDeck.splice(p2CardIndex,1);
-	originalNumArray.forEach(function(subNum) {
-		if (subNum === p1Card.number) {
-			originalNumArray.splice(subNum,1);
-		}
-		if (subNum === p2Card.number) {
-			originalNumArray.splice(subNum,1);
-		}
-	});
+// alerts players that the next round is happening and who is winning
+function newRoundAlert() {
+		alert("Player 1 has " + p1RoundWinners.length + " cards in deck, and " + " Player 2 has " + p2RoundWinners.length + " cards in deck");
 }
 
 // compares power and toughness of each creature in tempFightArray and 
-
 function compareCreatures() {
-	if (tempFightArray[0].power >= tempFightArray[1].toughness) {
+	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
 		p1IsWinner();
-		matchNumbers();
-	} else if (tempFightArray[1].power >= tempFightArray[0].toughness) {
+		// matchNumbers();
+	} else if (tempFightArray[1].power >= tempFightArray[0].toughness && tempFightArray[0].power < tempFightArray[1].toughness) {
 		p2IsWinner();
-		matchNumbers();
+		// matchNumbers();
 	} else {
 		whenWARhappens();
-		matchNumbers();
+		// matchNumbers();
 	}
+	matchNumbers();
+	// console.log(p1RoundWinners,p2RoundWinners);
 }
 
 // when p1 wins
 function p1IsWinner() {
-	p1Winners.push(tempFightArray[0]);
-	p1Winners.push(tempFightArray[1]);
+	p1RoundWinners.push(tempFightArray[0]);
+	p1RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
-	p1Winners = p1Winners.concat(tempWarPile);
+	p1RoundWinners = p1RoundWinners.concat(tempWarPile);
+	tempWarPile.splice(0,39);
 }
 
 // when p2 wins
 function p2IsWinner() {
-	p2Winners.push(tempFightArray[0]);
-	p2Winners.push(tempFightArray[1]);
+	p2RoundWinners.push(tempFightArray[0]);
+	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
-	p2Winners = p2Winners.concat(tempWarPile);
+	p2RoundWinners = p2RoundWinners.concat(tempWarPile);
+	tempWarPile.splice(0,39);
 }
-// what happens when there is WAR!
 
+// what happens when there is WAR!
 function whenWARhappens() {
+	console.log('yo it\'s war');
 	tempWarPile.push(tempFightArray[0]);
 	tempWarPile.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
@@ -235,3 +369,57 @@ function whenWARhappens() {
 // function showImage() {
 // 	if (p1Winners.)
 // }
+
+// resets arrays back to original lengths for new game
+// function resetGame() {
+// 	p1RoundWinners.forEach(function(cards1) {
+// 		fullDeck.push(cards1);
+// 	});
+// 	p1Deck.forEach(function(cards1) {
+// 		fullDeck.push(cards1);
+// 	});
+// 	p1RoundWinners = [];
+// 	p1Deck = [];
+// 	p2RoundWinners.forEach(function(cards2) {
+// 		fullDeck.push(cards2);
+// 	});
+// 	p2Deck.forEach(function(cards2) {
+// 		fullDeck.push(cards2);
+// 	});
+// 	fullDeck.push(tempFightArray[0]);
+// 	fullDeck.push(tempFightArray[1]);
+// 	tempFightArray.splice(0,2);
+// 	p2RoundWinners = [];
+// 	p2Deck = [];
+// }
+
+// sets up both players winning piles for next round
+function resetPiles(ranCard1,ranCard2) {
+	if (p1Deck.length === 0) {
+		winCon();
+		p1Deck = p1RoundWinners.concat(p1Deck);
+		p1RoundWinners = [];
+		shuffle1(p1Deck);
+		ranCard1 = p1Deck.pop();
+		tempFightArray.push(ranCard1);
+	} 
+	if (p2Deck.length === 0) {
+		winCon();
+		p2Deck = p2RoundWinners.concat(p2Deck);
+		p2RoundWinners = [];
+		shuffle1(p2Deck);
+		ranCard2 = p2Deck.pop();
+		tempFightArray.push(ranCard2);
+	}
+}
+
+// win condition
+function winCon() {
+	if (p1RoundWinners.length === 0) {
+		alert('Player 1 has lost and Player two is the winner!');
+	} 
+	if (p2RoundWinners.length === 0) {
+		alert('Player 2 has lost and Player one is the winner!');
+	}
+	// resetGame();
+}
