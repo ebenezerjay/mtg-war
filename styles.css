@@ -11,6 +11,7 @@ header {
 }
 
 main {
+	flex-wrap: wrap;
 	width: 100%;
 }
 
@@ -19,10 +20,25 @@ article {
 	width: 49%;
 }
 
-img {
+p {
+	/* border: 2px dotted whitesmoke; */
+	color: aliceblue;
+	font-size: 2em;
+	margin: 5%;
+	text-align: center;
+}
+
+p:hover {
+	cursor: pointer;
+}
+
+h1 {
+	font-size: 3em;
+}
+/* img {
 	margin: 5% 11%;
 	width: 45%;
-}
+} */
 
 button {
 	height: 50px;
@@ -32,10 +48,26 @@ button {
 h2 {
 	color: whitesmoke;
 }
+
+hr {
+	position: relative;
+	width: 8px;
+	right: 5px;
+	bottom: 10px;
+}
+
 /* class selectors by page order, top down*/
 
 .flex {
 	display: flex;
+}
+
+.show-directions-button,
+.show-directions-button2 {
+	display: none;
+	height: 35px;
+	margin: 10px auto;
+	width: fit-content;
 }
 
 .p2-article {
@@ -44,6 +76,24 @@ h2 {
 
 .buttons-container {
 	align-items: center;
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 	width: 15%
+}
+
+.p1-back-img,
+.p2-back-img {
+	margin: 5% 11%;
+	width: 45%;
+}
+
+.p1Card-img,
+.p2Card-img {
+	margin: 5% 11%;
+	width: 45%;
+}
+
+.bottom-section {
+	justify-content: space-between;
+	margin: 5%;
+	width: 100%;
 }
