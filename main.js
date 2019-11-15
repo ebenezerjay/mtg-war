@@ -289,8 +289,8 @@ const fightButton = $("#fight-button-id");
 const newGameButton = $("#new-game-button-id");
 const p1BackImg = $("#p1-back-img-id");
 const p2BackImg = $("#p2-back-img-id");
-const modalContainer = document.querySelector("#modal-container-id");
-const modalContent = document.querySelector("#modal-content-id");
+const modalContainer = document.getElementById("modal-container-id");
+const hideModalButton = document.getElementById("hide-modal-btn-id");
 const bottomSection = $(".bottom-section");
 const hideDirectionBtn = $("#par1-id");
 const hideDirectionBtn2 = $("#par2-id");
@@ -339,7 +339,10 @@ startGameButton.on('click', function() {
 
 // actions for when fight btn is clicked
 fightButton.on('click', function() {
+	initialModalTrigger();
 	compareCreatures();
+	modalContainer.style.display = "flex";
+	hideModalButton.style.display = "flex";
 });
 
 // actions for when new game btn is clicked
@@ -372,6 +375,12 @@ showDirectionsBTN2.on('click', function() {
 	document.getElementById("show-directions-button2-id").style.display = "none";
 });
 
+// hides the modal pop up
+hideModalButton.addEventListener('click', function() {
+	modalContainer.style.display = "none";
+	hideModalButton.style.display = "none";
+});
+
 // functions
 
 // shuffles all the elements of the decks (Fisher Yates shuffle algorithm)
@@ -392,7 +401,6 @@ function splitFull() {
 
 // creates and compares the random #s to the cards in fullDeck array and puts the two #s into the tempFightArray, 
 // also removes those cards from the full deck array
-
 function matchNumbers() {
 	let ranCard1;
 	let ranCard2;
@@ -401,20 +409,23 @@ function matchNumbers() {
 	ranCard2 = p2Deck.pop();
 	tempFightArray.push(ranCard1);
 	tempFightArray.push(ranCard2);
-	showImage();
 }
 
 // compares power and toughness of each creature in tempFightArray and 
 function compareCreatures() {
+	showModalImages();
+	let explainerParagraph = document.querySelector(".modal-text");
 	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
+		explainerParagraph.innerHTML = tempFightArray[0].name + "'s " + "power is greater than or equal to " + tempFightArray[1].name + "'s " + " toughness";
 		p1IsWinner();
 	} else if (tempFightArray[1].power >= tempFightArray[0].toughness && tempFightArray[0].power < tempFightArray[1].toughness) {
+		explainerParagraph.innerHTML = tempFightArray[1].name + "'s " + "power is greater than or equal to " + tempFightArray[0].name + "'s " + " toughness";
 		p2IsWinner();
 	} else {
+		explainerParagraph.innerHTML = "WAR!";
 		whenWARhappens();
 	}
 	matchNumbers();
-	// console.log(p1RoundWinners,p2RoundWinners);
 }
 
 // when p1 card wins
@@ -444,15 +455,36 @@ function whenWARhappens() {
 }
 
 // displays image of recently won card
-function showImage() {
-let p1CardImg = new Image(225,325);
-let p2CardImg = new Image(225,325);
-p1CardImg.src = tempFightArray[0].src;
-p2CardImg.src = tempFightArray[1].src;
-// $("img").addClass("p1Card-img");
-// $("img").addClass("p2Card-img");
-$("#modal-container-id").append(p1CardImg);
-$("#modal-container-id").append(p2CardImg);
+function showModalImages() {
+	let p1CardImg = new Image(225,325);
+	let p2CardImg = new Image(225,325);
+	p1CardImg.src = tempFightArray[0].src;
+	p2CardImg.src = tempFightArray[1].src;
+	$("#modal-container-id").append(p1CardImg);
+	$("#modal-container-id").append(p2CardImg);
+	$("article.img").addClass("modal-img");
+	styleImages(p1CardImg,p2CardImg);
+}
+
+// styles the appended images
+function styleImages(p1CardImg,p2CardImg) {
+	p1CardImg.style.margin = "auto";
+	p1CardImg.style.position = "absolute";
+	p1CardImg.style.top = "34%";
+	p1CardImg.style.left = "2%";
+	p2CardImg.style.margin = "auto";
+	p2CardImg.style.position = "absolute";
+	p2CardImg.style.top = "34%";
+	p2CardImg.style.left = "65%";
+}
+
+// shows the modal pop up when game is started
+function initialModalTrigger() {
+	if (p1Deck.length === 19) {
+		modalContainer.style.display = "flex";
+	} else {
+		modalContainer.style.display = "none";
+	}
 }
 
 // resets arrays back to original lengths for new game
