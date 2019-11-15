@@ -70,6 +70,56 @@ hr {
 	width: fit-content;
 }
 
+.power-toughness-image {
+	width: 10%;
+}
+
+	/* selectors for modal pop up */
+.modal-container {
+	background: whitesmoke;
+	border: 1px solid red;
+	display: none;
+	justify-content: center;
+	height: 73%;
+	padding: 5px;
+	position: fixed;
+	top: 14%;
+	left: 16%;
+	width: 71%;
+	z-index: 0;
+}
+
+.modal-text {
+	color: black;
+	margin: 5px;
+}
+
+.hide-modal-btn {
+	border-radius: 5px;
+	display: none;
+	justify-content: center;
+	height: 35px;
+	width: 35px;
+	position: absolute;
+	top: 14%;
+	left: 12%;
+}
+
+.hide-modal-btn:hover {
+	cursor: pointer;
+	border: 1px dotted purple;
+}
+
+#hide-image-id {
+	height: 30px;
+	width: 30px;
+}
+
+article.modal-img {
+	display: none;
+}
+
+/* selectors for top section */
 .p2-article {
 	justify-content: flex-end;
 }
@@ -78,6 +128,11 @@ hr {
 	align-items: center;
 	flex-wrap: wrap;
 	width: 15%
+}
+
+.start-button:hover {
+	border: 2px dotted purple;
+	cursor: pointer;
 }
 
 .p1-back-img,

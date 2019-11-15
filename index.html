@@ -4,7 +4,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="normalize.css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="styles.css">
-		<script src="https://kit.fontawesome.com/891d089ed2.js" crossorigin="anonymous"></script>
 		<title>MTG WAR!</title>
 	</head>
 	<body>
@@ -15,7 +14,8 @@
 			<p class="par1" id="par1-id">
 				Just like the card game WAR! Only we are using Magic The Gathering creature cards. Whosever creature has a greater 
 				or equal power than the other players creatures toughness, wins the fight and the winning player gets both cards. 
-				You win by collecting all the cards in your deck. 
+				You win by collecting all the cards in your deck. <br>
+				Power on the left<img src="images/power-toughnes.jpg" alt="lill image showing a close up of the power and toughness on the card" class="power-toughness-image">Toughness on the right
 			</p>
 		</section>
 		<button id="show-directions-button-id" class="show-directions-button" type="button">Show directions</button>
@@ -26,15 +26,15 @@
 			</p>
 		</section>
 		<button id="show-directions-button2-id" class="show-directions-button2" type="button">Show WAR! directions</button>
-		<main class="flex">
+		<main class="flex" id="main-id">
 			<section class="top-section flex">
+				<button class="hide-modal-btn flex" id="hide-modal-btn-id" type="button"><img src="images/times-circle-solid.svg" alt="lill delete/hide button" id="hide-image-id"></button>
 				<article class="modal-container flex" id="modal-container-id">
-					<div class="modal-content flex" id="model-content-id">
-						<p class="modal-text">
-							<!-- explainer text generated based on winner -->
-						</p>
-						<button class="hide-modal-btn" id="hide-modal-btn"><img src="images/delete.svg" alt="lill delete/hide button"></button>
-					</div>
+					<p class="modal-text" id="modal-explainer-text">
+						<!-- explainer text -->
+					</p>
+					<!-- <img src="images/arrow-left-solid.svg" alt="lill arrow pointing left" class="arrow1-image"> -->
+					<!-- <img src="images/arrow-left-solid.svg" alt="lill arrow pointing left" class="arrow2-image"> -->
 				</article>
 				<article class="p1-article flex">
 					<img src="images/Magic_card_back.jpg" alt="back of magic the gathering card" class="p1-back-img" id="p1-back-img-id">
