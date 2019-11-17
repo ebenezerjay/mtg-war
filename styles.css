@@ -71,6 +71,7 @@ hr {
 }
 
 .power-toughness-image {
+	padding: 0px 10px;
 	width: 10%;
 }
 
@@ -91,7 +92,14 @@ hr {
 
 .modal-text {
 	color: black;
-	margin: 5px;
+	height: fit-content;
+	justify-content: center;
+	margin: 5px auto;
+	width: 100%;
+}
+
+.war-count-heading {
+	width: 37%;
 }
 
 .hide-modal-btn {
@@ -100,7 +108,7 @@ hr {
 	justify-content: center;
 	height: 35px;
 	width: 35px;
-	position: absolute;
+	position: fixed;
 	top: 14%;
 	left: 12%;
 }
@@ -139,6 +147,11 @@ article.modal-img {
 .p2-back-img {
 	margin: 5% 11%;
 	width: 45%;
+}
+
+.p1-score-heading,
+.p2-score-heading {
+	color: blanchedalmond;
 }
 
 .p1Card-img,

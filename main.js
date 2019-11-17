@@ -299,6 +299,8 @@ const directions2 = document.getElementById("directions2-section-id");
 const showDirectionsBTN = $("#show-directions-button-id");
 const showDirectionsBTN2 = $("#show-directions-button2-id");
 const header = $("#header-id");
+const p1ScoreSection = $("#p1-score-article-id");
+const p2ScoreSection = $("#p2-score-article-id");
 
 // array for creature cards while fighting
 const tempFightArray = [];
@@ -343,6 +345,8 @@ fightButton.on('click', function() {
 	compareCreatures();
 	modalContainer.style.display = "flex";
 	hideModalButton.style.display = "flex";
+	getWarCount();
+	showPlayerScores();
 });
 
 // actions for when new game btn is clicked
@@ -379,6 +383,7 @@ showDirectionsBTN2.on('click', function() {
 hideModalButton.addEventListener('click', function() {
 	modalContainer.style.display = "none";
 	hideModalButton.style.display = "none";
+	console.log(p1RoundWinners.length,p1Deck.length);
 });
 
 // functions
@@ -434,6 +439,7 @@ function p1IsWinner() {
 	p1RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p1RoundWinners = p1RoundWinners.concat(tempWarPile);
+	appendP1WonCard();
 	tempWarPile.splice(0,39);
 }
 
@@ -443,6 +449,7 @@ function p2IsWinner() {
 	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p2RoundWinners = p2RoundWinners.concat(tempWarPile);
+	appendP2WonCard();
 	tempWarPile.splice(0,39);
 }
 
@@ -463,11 +470,11 @@ function showModalImages() {
 	$("#modal-container-id").append(p1CardImg);
 	$("#modal-container-id").append(p2CardImg);
 	$("article.img").addClass("modal-img");
-	styleImages(p1CardImg,p2CardImg);
+	styleModalImages(p1CardImg,p2CardImg);
 }
 
 // styles the appended images
-function styleImages(p1CardImg,p2CardImg) {
+function styleModalImages(p1CardImg,p2CardImg) {
 	p1CardImg.style.margin = "auto";
 	p1CardImg.style.position = "absolute";
 	p1CardImg.style.top = "34%";
@@ -475,7 +482,45 @@ function styleImages(p1CardImg,p2CardImg) {
 	p2CardImg.style.margin = "auto";
 	p2CardImg.style.position = "absolute";
 	p2CardImg.style.top = "34%";
-	p2CardImg.style.left = "65%";
+	p2CardImg.style.left = "69%";
+}
+
+// appends recently won images and updates score sections
+function appendP1WonCard() {
+	let p1RecentlyWonImg = new Image(225, 325);
+	let p1WonCard = p1RoundWinners.length - 1;
+	console.log(p1RoundWinners[p1WonCard]);
+	p1RecentlyWonImg.src = p1RoundWinners[p1WonCard].src;
+	$("#p1-score-article-id").append(p1RecentlyWonImg);
+}
+
+function appendP2WonCard() {
+	let p2RecentlyWonImg = new Image(225,325);
+	let p2WonCard = p2RoundWinners.length -1;
+	console.log(p2RoundWinners[p2WonCard]);
+	p2RecentlyWonImg.src = p2RoundWinners[p2WonCard].src;
+	$("#p2-score-article-id").append(p2RecentlyWonImg);
+}
+
+function showPlayerScores() {
+	let p1DeckCount = p1RoundWinners.length + p1Deck.length;
+	let p2DeckCount = p2RoundWinners.length + p2Deck.length;
+	let p1ScoreHeading = document.getElementById("p1-score-heading-id");
+	let p2ScoreHeading = document.getElementById("p2-score-heading-id");
+	p1ScoreHeading.innerText = "Player 1 Deck total " + p1DeckCount;
+	p2ScoreHeading.innerText = "Player 2 Deck total " + p2DeckCount;
+}
+
+// displays the current amount of creatures in war pile
+function getWarCount() {
+	let warCountHeading = document.getElementById("war-count-heading-id");
+	let warCount = tempWarPile.length;
+	warCountHeading.innerText = "There are " + warCount + " cards currently in the WAR! pile";
+	if (warCount === 0) {
+		warCountHeading.style.display = "none";
+	} else {
+		warCountHeading.style.display = "block";
+	}
 }
 
 // shows the modal pop up when game is started
