@@ -2,6 +2,12 @@
 
 body {
 	background-color: black;
+	background-image: 
+		radial-gradient(circle at top left, white, transparent 13%),
+		radial-gradient(circle at top right, red, transparent 13%),
+		radial-gradient(circle at bottom left, blue, transparent 13%),
+		radial-gradient(circle at bottom right, green, transparent 13%)
+		;
 }
 
 header {

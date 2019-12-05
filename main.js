@@ -38,8 +38,8 @@ const fullDeck = [
 	},
 	{
 		name: "Earth Elemental",
-		power: 5,
-		toughness: 4,
+		power: 4,
+		toughness: 5,
 		number: 5,
 		src: "images/earth-elemental.jpg",
 	},
@@ -94,8 +94,8 @@ const fullDeck = [
 	},
 	{
 		name: "Hill Giant",
-		power: 2,
-		toughness: 2,
+		power: 3,
+		toughness: 3,
 		number: 13,
 		src: "images/hill-giant.jpg",
 	},
@@ -108,8 +108,8 @@ const fullDeck = [
 	},
 	{
 		name: "Mass of Ghouls",
-		power: 2,
-		toughness: 1,
+		power: 5,
+		toughness: 3,
 		number: 15,
 		src: "images/mass-of-ghouls.jpg",
 	},
@@ -334,6 +334,7 @@ $(document).ready(function() {
 startGameButton.on('click', function() {
 	splitFull();
 	matchNumbers();
+	console.log(p1Deck,p2Deck);
 	$(newGameButton).prop("disabled", false);
 	$(fightButton).prop("disabled", false);
 	$(startGameButton).prop("disabled", true);
@@ -383,7 +384,6 @@ showDirectionsBTN2.on('click', function() {
 hideModalButton.addEventListener('click', function() {
 	modalContainer.style.display = "none";
 	hideModalButton.style.display = "none";
-	console.log(p1RoundWinners.length,p1Deck.length);
 });
 
 // functions
@@ -419,6 +419,8 @@ function matchNumbers() {
 // compares power and toughness of each creature in tempFightArray and 
 function compareCreatures() {
 	showModalImages();
+	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	let explainerParagraph = document.querySelector(".modal-text");
 	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
 		explainerParagraph.innerHTML = tempFightArray[0].name + "'s " + "power is greater than or equal to " + tempFightArray[1].name + "'s " + " toughness";
@@ -435,30 +437,39 @@ function compareCreatures() {
 
 // when p1 card wins
 function p1IsWinner() {
+	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	p1RoundWinners.push(tempFightArray[0]);
 	p1RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p1RoundWinners = p1RoundWinners.concat(tempWarPile);
 	appendP1WonCard();
 	tempWarPile.splice(0,39);
+	console.log(tempWarPile);
 }
 
 // when p2 card wins
 function p2IsWinner() {
+	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	p2RoundWinners.push(tempFightArray[0]);
 	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p2RoundWinners = p2RoundWinners.concat(tempWarPile);
 	appendP2WonCard();
 	tempWarPile.splice(0,39);
+	console.log(tempWarPile);
 }
 
 // what happens when there is WAR!
 function whenWARhappens() {
 	console.log('yo it\'s war');
+	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	tempWarPile.push(tempFightArray[0]);
 	tempWarPile.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
+	console.log(tempWarPile);
 }
 
 // displays image of recently won card
@@ -489,7 +500,6 @@ function styleModalImages(p1CardImg,p2CardImg) {
 function appendP1WonCard() {
 	let p1RecentlyWonImg = new Image(225, 325);
 	let p1WonCard = p1RoundWinners.length - 1;
-	console.log(p1RoundWinners[p1WonCard]);
 	p1RecentlyWonImg.src = p1RoundWinners[p1WonCard].src;
 	$("#p1-score-article-id").append(p1RecentlyWonImg);
 }
@@ -497,7 +507,6 @@ function appendP1WonCard() {
 function appendP2WonCard() {
 	let p2RecentlyWonImg = new Image(225,325);
 	let p2WonCard = p2RoundWinners.length -1;
-	console.log(p2RoundWinners[p2WonCard]);
 	p2RecentlyWonImg.src = p2RoundWinners[p2WonCard].src;
 	$("#p2-score-article-id").append(p2RecentlyWonImg);
 }
@@ -577,10 +586,12 @@ function resetPiles(ranCard1,ranCard2) {
 
 // win condition
 function winCon() {
-	if (p1RoundWinners.length === 0) {
+	if (p1RoundWinners.length === 0 && p1Deck.length === 0) {
+		$(fightButton).prop("disabled", true);
 		alert('Player 1 has lost and Player two is the winner!');
 	} 
-	if (p2RoundWinners.length === 0) {
+	if (p2RoundWinners.length === 0 && p2Deck.length === 0) {
+		$(fightButton).prop("disabled", true);
 		alert('Player 2 has lost and Player one is the winner!');
 	}
 	// resetGame();
