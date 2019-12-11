@@ -310,6 +310,8 @@ const tempWarPile = [];
 
 // arrays for each players cards won
 let p1RoundWinners = [];
+let p1RoundWinners2 = [];
+let p2RoundWinners2 = [];
 let p1Deck = [];
 let p2RoundWinners = [];
 let p2Deck = [];
@@ -334,7 +336,7 @@ $(document).ready(function() {
 startGameButton.on('click', function() {
 	splitFull();
 	matchNumbers();
-	console.log(p1Deck,p2Deck);
+	// console.log(p1Deck,p2Deck);
 	$(newGameButton).prop("disabled", false);
 	$(fightButton).prop("disabled", false);
 	$(startGameButton).prop("disabled", true);
@@ -419,8 +421,8 @@ function matchNumbers() {
 // compares power and toughness of each creature in tempFightArray and 
 function compareCreatures() {
 	showModalImages();
-	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
+	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	let explainerParagraph = document.querySelector(".modal-text");
 	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
 		explainerParagraph.innerHTML = tempFightArray[0].name + "'s " + "power is greater than or equal to " + tempFightArray[1].name + "'s " + " toughness";
@@ -437,7 +439,7 @@ function compareCreatures() {
 
 // when p1 card wins
 function p1IsWinner() {
-	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
 	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	p1RoundWinners.push(tempFightArray[0]);
 	p1RoundWinners.push(tempFightArray[1]);
@@ -445,31 +447,31 @@ function p1IsWinner() {
 	p1RoundWinners = p1RoundWinners.concat(tempWarPile);
 	appendP1WonCard();
 	tempWarPile.splice(0,39);
-	console.log(tempWarPile);
+	// console.log(tempWarPile);
 }
 
 // when p2 card wins
 function p2IsWinner() {
 	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
+	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	p2RoundWinners.push(tempFightArray[0]);
 	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p2RoundWinners = p2RoundWinners.concat(tempWarPile);
 	appendP2WonCard();
 	tempWarPile.splice(0,39);
-	console.log(tempWarPile);
+	// console.log(tempWarPile);
 }
 
 // what happens when there is WAR!
 function whenWARhappens() {
-	console.log('yo it\'s war');
-	console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	console.log(tempFightArray[1].power, tempFightArray[1].toughness);
+	// console.log('yo it\'s war');
+	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
+	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	tempWarPile.push(tempFightArray[0]);
 	tempWarPile.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
-	console.log(tempWarPile);
+	// console.log(tempWarPile);
 }
 
 // displays image of recently won card
@@ -498,22 +500,32 @@ function styleModalImages(p1CardImg,p2CardImg) {
 
 // appends recently won images and updates score sections
 function appendP1WonCard() {
-	let p1RecentlyWonImg = new Image(225, 325);
-	let p1WonCard = p1RoundWinners.length - 1;
-	p1RecentlyWonImg.src = p1RoundWinners[p1WonCard].src;
-	$("#p1-score-article-id").append(p1RecentlyWonImg);
+	console.log(p1RoundWinners);
+	p1RoundWinners.forEach(function(card) {
+		let p1RecentlyWonImg = new Image(225, 325);
+		console.log(card);
+		p1RecentlyWonImg.src = card.src;
+		$("#p1-score-article-id").append(p1RecentlyWonImg);
+		p1RoundWinners2 = p1RoundWinners.concat(p1RoundWinners2);
+		p1RoundWinners = [];
+	});
 }
 
 function appendP2WonCard() {
-	let p2RecentlyWonImg = new Image(225,325);
-	let p2WonCard = p2RoundWinners.length -1;
-	p2RecentlyWonImg.src = p2RoundWinners[p2WonCard].src;
-	$("#p2-score-article-id").append(p2RecentlyWonImg);
+	console.log(p2RoundWinners);
+	p2RoundWinners.forEach(function(card) {
+		let p2RecentlyWonImg = new Image(225,325);
+		console.log(card);
+		p2RecentlyWonImg.src = card.src;
+		$("#p2-score-article-id").append(p2RecentlyWonImg);
+		p2RoundWinners2 = p2RoundWinners.concat(p2RoundWinners2);
+		p2RoundWinners = [];
+	});
 }
 
 function showPlayerScores() {
-	let p1DeckCount = p1RoundWinners.length + p1Deck.length;
-	let p2DeckCount = p2RoundWinners.length + p2Deck.length;
+	let p1DeckCount = p1RoundWinners2.length + p1Deck.length + tempFightArray.length -1;
+	let p2DeckCount = p2RoundWinners2.length + p2Deck.length + tempFightArray.length -1;
 	let p1ScoreHeading = document.getElementById("p1-score-heading-id");
 	let p2ScoreHeading = document.getElementById("p2-score-heading-id");
 	p1ScoreHeading.innerText = "Player 1 Deck total " + p1DeckCount;
@@ -568,16 +580,16 @@ function initialModalTrigger() {
 function resetPiles(ranCard1,ranCard2) {
 	if (p1Deck.length === 0) {
 		winCon();
-		p1Deck = p1RoundWinners.concat(p1Deck);
-		p1RoundWinners = [];
+		p1Deck = p1RoundWinners2.concat(p1Deck);
+		p1RoundWinners2 = [];
 		shuffle1(p1Deck);
 		ranCard1 = p1Deck.pop();
 		tempFightArray.push(ranCard1);
 	} 
 	if (p2Deck.length === 0) {
 		winCon();
-		p2Deck = p2RoundWinners.concat(p2Deck);
-		p2RoundWinners = [];
+		p2Deck = p2RoundWinners2.concat(p2Deck);
+		p2RoundWinners2 = [];
 		shuffle1(p2Deck);
 		ranCard2 = p2Deck.pop();
 		tempFightArray.push(ranCard2);
