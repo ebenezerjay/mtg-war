@@ -299,8 +299,14 @@ const directions2 = document.getElementById("directions2-section-id");
 const showDirectionsBTN = $("#show-directions-button-id");
 const showDirectionsBTN2 = $("#show-directions-button2-id");
 const header = $("#header-id");
-const p1ScoreSection = $("#p1-score-article-id");
-const p2ScoreSection = $("#p2-score-article-id");
+const p1ScoreSection = $(".p1-score-article");
+const p2ScoreSection = $(".p2-score-article");
+const p1ImageContainer = $(".p1-image-container");
+const p2ImageContainer = $(".p2-image-container");
+
+
+let p1Wins = false;
+let p2Wins = false;
 
 // array for creature cards while fighting
 const tempFightArray = [];
@@ -311,20 +317,20 @@ const tempWarPile = [];
 // arrays for each players cards won
 let p1RoundWinners = [];
 let p1RoundWinners2 = [];
-let p2RoundWinners2 = [];
 let p1Deck = [];
 let p2RoundWinners = [];
+let p2RoundWinners2 = [];
 let p2Deck = [];
 
 
 // event handlers
 
 // enables new game button when the start game button is clicked
-// $(document).ready(function() {
-// 	$(startGameButton).click(function() {
-// 		$(newGameButton).prop("disabled", false);
-// 	});
-// });
+$(document).ready(function() {
+	$(startGameButton).click(function() {
+		$(newGameButton).prop("disabled", false);
+	});
+});
 
 // disables the fight button on page load
 $(document).ready(function() {
@@ -334,9 +340,11 @@ $(document).ready(function() {
 
 // actions when start game btn is clicked
 startGameButton.on('click', function() {
+	// p1ScoreSection.style.display = "block";
+	// p2ScoreSection.style.display = "block";
 	splitFull();
 	matchNumbers();
-	// console.log(p1Deck,p2Deck);
+	getDeckCounts();
 	$(newGameButton).prop("disabled", false);
 	$(fightButton).prop("disabled", false);
 	$(startGameButton).prop("disabled", true);
@@ -349,7 +357,7 @@ fightButton.on('click', function() {
 	modalContainer.style.display = "flex";
 	hideModalButton.style.display = "flex";
 	getWarCount();
-	showPlayerScores();
+	getDeckCounts();
 });
 
 // actions for when new game btn is clicked
@@ -357,7 +365,7 @@ newGameButton.on('click', function() {
 	$(newGameButton).prop("disabled", true);
 	$(startGameButton).prop("disabled", false);
 	$(fightButton).prop("disabled", true);
-	// resetGame();
+	resetGame();
 });
 
 // hides the directions when paragraph is clicked
@@ -404,6 +412,7 @@ function splitFull() {
 	shuffle1(fullDeck);
 	p1Deck = fullDeck.splice(0,20);
 	p2Deck = p2Deck.concat(fullDeck);
+	fullDeck.splice(0,20);
 }
 
 // creates and compares the random #s to the cards in fullDeck array and puts the two #s into the tempFightArray, 
@@ -421,8 +430,6 @@ function matchNumbers() {
 // compares power and toughness of each creature in tempFightArray and 
 function compareCreatures() {
 	showModalImages();
-	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	let explainerParagraph = document.querySelector(".modal-text");
 	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
 		explainerParagraph.innerHTML = tempFightArray[0].name + "'s " + "power is greater than or equal to " + tempFightArray[1].name + "'s " + " toughness";
@@ -439,39 +446,30 @@ function compareCreatures() {
 
 // when p1 card wins
 function p1IsWinner() {
-	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	p1RoundWinners.push(tempFightArray[0]);
 	p1RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p1RoundWinners = p1RoundWinners.concat(tempWarPile);
 	appendP1WonCard();
 	tempWarPile.splice(0,39);
-	// console.log(tempWarPile);
 }
 
 // when p2 card wins
 function p2IsWinner() {
-	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
+
 	p2RoundWinners.push(tempFightArray[0]);
 	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
 	p2RoundWinners = p2RoundWinners.concat(tempWarPile);
 	appendP2WonCard();
 	tempWarPile.splice(0,39);
-	// console.log(tempWarPile);
 }
 
 // what happens when there is WAR!
 function whenWARhappens() {
-	// console.log('yo it\'s war');
-	// console.log(tempFightArray[0].power, tempFightArray[0].toughness);
-	// console.log(tempFightArray[1].power, tempFightArray[1].toughness);
 	tempWarPile.push(tempFightArray[0]);
 	tempWarPile.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
-	// console.log(tempWarPile);
 }
 
 // displays image of recently won card
@@ -500,36 +498,86 @@ function styleModalImages(p1CardImg,p2CardImg) {
 
 // appends recently won images and updates score sections
 function appendP1WonCard() {
-	console.log(p1RoundWinners);
 	p1RoundWinners.forEach(function(card) {
 		let p1RecentlyWonImg = new Image(225, 325);
-		console.log(card);
 		p1RecentlyWonImg.src = card.src;
-		$("#p1-score-article-id").append(p1RecentlyWonImg);
+		$(".p1-image-container").append(p1RecentlyWonImg);
 		p1RoundWinners2 = p1RoundWinners.concat(p1RoundWinners2);
 		p1RoundWinners = [];
 	});
+	// console.log(p1RecentlyWonImg);
 }
 
 function appendP2WonCard() {
-	console.log(p2RoundWinners);
 	p2RoundWinners.forEach(function(card) {
 		let p2RecentlyWonImg = new Image(225,325);
-		console.log(card);
 		p2RecentlyWonImg.src = card.src;
-		$("#p2-score-article-id").append(p2RecentlyWonImg);
+		$(".p2-image-container").append(p2RecentlyWonImg);
 		p2RoundWinners2 = p2RoundWinners.concat(p2RoundWinners2);
 		p2RoundWinners = [];
 	});
 }
 
-function showPlayerScores() {
-	let p1DeckCount = p1RoundWinners2.length + p1Deck.length + tempFightArray.length -1;
-	let p2DeckCount = p2RoundWinners2.length + p2Deck.length + tempFightArray.length -1;
-	let p1ScoreHeading = document.getElementById("p1-score-heading-id");
-	let p2ScoreHeading = document.getElementById("p2-score-heading-id");
-	p1ScoreHeading.innerText = "Player 1 Deck total " + p1DeckCount;
-	p2ScoreHeading.innerText = "Player 2 Deck total " + p2DeckCount;
+// runs all of the functions that get and display the deck totals
+function getDeckCounts() {
+	getP1DeckCount();
+	getP2DeckCount();
+	getP1UnplayedCount();
+	getP2UnplayedCount();
+	getP1WinnersPileCount();
+	getP2WinnersPileCount();
+}
+
+// calculates and displays total amount of cards p1 has
+function getP1DeckCount() {
+	let p1DeckTotal = p1RoundWinners2.length + p1Deck.length + 1;
+	let p1ScoreHeading = document.getElementById("p1-deck-total-heading-id");
+	p1ScoreHeading.innerText = "Total amount of cards in deck " + p1DeckTotal;
+}
+
+// calculates and displays the amount of cards yet to be played by p1
+function getP1UnplayedCount() {
+	let p1UnplayedDeckCount = p1Deck.length + 1;
+	let p1UnplayedDeckHeading = document.getElementById("p1-unplayed-deck-heading-id");
+	p1UnplayedDeckHeading.innerText = "Total amount of unplayed cards left in deck " + p1UnplayedDeckCount;
+}
+
+// calculates and displays the amount of cards already played and won by p1
+function getP1WinnersPileCount() {
+	let p1WinnerPile = p1RoundWinners2.length;
+	console.log(p1WinnerPile);
+	let p1WinnerPileHeading = document.getElementById("p1-winners-pile-heading-id");
+	if (p1WinnerPile > 0) {
+		p1WinnerPileHeading.innerText = "Amount of cards already played/won in player 1's deck " + p1WinnerPile; 
+	} else {
+		p1WinnerPileHeading.innerText = "";
+	}
+}
+
+// calculates and displays total amount of cards p2 has
+function getP2DeckCount() {
+	let p2DeckTotal = p2RoundWinners2.length + p2Deck.length + 1;
+	let p2ScoreHeading = document.getElementById("p2-deck-total-heading-id");
+	p2ScoreHeading.innerText = "Total amount of cards in deck " + p2DeckTotal;
+}
+
+// calculates and displays the amount of cards yet to be played by p2
+function getP2UnplayedCount() {
+	let p2UnplayedDeckCount = p2Deck.length + 1;
+	let p2UnplayedDeckHeading = document.getElementById("p2-unplayed-deck-heading-id");
+	p2UnplayedDeckHeading.innerText = "Total amount of unplayed cards left in deck " + p2UnplayedDeckCount;
+}
+
+// calculates and displays the amount of cards already played and won by p2
+function getP2WinnersPileCount() {
+	let p2WinnersPile = p2RoundWinners2.length;
+	console.log(p2WinnersPile);
+	let p2WinnersPileHeading = document.getElementById("p2-winners-pile-heading-id");
+	if (p2WinnersPile > 0) {
+		p2WinnersPileHeading.innerText = "Amount of cards already played/won in player 2's deck " + p2WinnersPile;
+	} else {
+		p2WinnersPileHeading.innerText = "";
+	}
 }
 
 // displays the current amount of creatures in war pile
@@ -553,28 +601,62 @@ function initialModalTrigger() {
 	}
 }
 
-// resets arrays back to original lengths for new game
-// function resetGame() {
-// 	p1RoundWinners.forEach(function(cards1) {
-// 		fullDeck.push(cards1);
-// 	});
-// 	p1Deck.forEach(function(cards1) {
-// 		fullDeck.push(cards1);
-// 	});
-// 	p1RoundWinners = [];
-// 	p1Deck = [];
-// 	p2RoundWinners.forEach(function(cards2) {
-// 		fullDeck.push(cards2);
-// 	});
-// 	p2Deck.forEach(function(cards2) {
-// 		fullDeck.push(cards2);
-// 	});
-// 	fullDeck.push(tempFightArray[0]);
-// 	fullDeck.push(tempFightArray[1]);
-// 	tempFightArray.splice(0,2);
-// 	p2RoundWinners = [];
-// 	p2Deck = [];
-// }
+// runs all the functions used to reset game
+function resetGame() {
+	p1BackToFull();
+	p2BackToFull();
+	resetArrays();
+	getDeckCounts();
+	p1ImageContainer.remove();
+	p2ImageContainer.remove();
+	reAddScoreSections();
+}
+
+// re-adds p1 decks to full deck
+function p1BackToFull() {
+	p1RoundWinners2.forEach(function(cards1) {
+		fullDeck.push(cards1);
+	});
+	p1Deck.forEach(function(cards1) {
+		fullDeck.push(cards1);
+	});
+	fullDeck.push(tempFightArray[0]);
+	console.log(p1RoundWinners2);
+}
+
+// re-adds p2 decks to full deck
+function p2BackToFull() {
+	p2RoundWinners2.forEach(function(cards2) {
+		fullDeck.push(cards2);
+	});
+	p2Deck.forEach(function(cards2) {
+		fullDeck.push(cards2);
+	});
+	fullDeck.push(tempFightArray[1]);
+	console.log(p2RoundWinners2);
+}
+
+// resets both players arrays to empty
+function resetArrays() {
+	p1RoundWinners2 = [];
+	p1Deck = [];
+	tempFightArray.splice(0,2);
+	p2RoundWinners2 = [];
+	p2Deck = [];
+	console.log(p1RoundWinners2,p2RoundWinners2);
+}
+
+// adds the removed score sections back to the dom
+function reAddScoreSections() {
+	$(".p1-score-article").append("<div></div>");
+	$(".p2-score-article").append("<div></div>");
+	$("div").addClass("p1-image-container");
+	$("div").addClass("p2-image-container");
+	// let p1ImgCont = $(".p1-image-container");
+	// let p2ImgCont = $(".p2-image-container");
+
+	console.log(p1ImageContainer,p2ImageContainer);
+}
 
 // sets up both players winning piles for next round
 function resetPiles(ranCard1,ranCard2) {
@@ -598,13 +680,14 @@ function resetPiles(ranCard1,ranCard2) {
 
 // win condition
 function winCon() {
-	if (p1RoundWinners.length === 0 && p1Deck.length === 0) {
+	if (p1RoundWinners2.length === 0 && p1Deck.length === 0) {
 		$(fightButton).prop("disabled", true);
 		alert('Player 1 has lost and Player two is the winner!');
+		resetGame();
 	} 
-	if (p2RoundWinners.length === 0 && p2Deck.length === 0) {
+	if (p2RoundWinners2.length === 0 && p2Deck.length === 0) {
 		$(fightButton).prop("disabled", true);
 		alert('Player 2 has lost and Player one is the winner!');
+		resetGame();
 	}
-	// resetGame();
 }

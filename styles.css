@@ -27,7 +27,8 @@ article {
 }
 
 p {
-	/* border: 2px dotted whitesmoke; */
+	/* border: 2px solid whitesmoke; */
+	border-radius: 25px;
 	color: aliceblue;
 	font-size: 2em;
 	margin: 5%;
@@ -41,6 +42,10 @@ p:hover {
 h1 {
 	font-size: 3em;
 }
+
+h2 {
+	color: blanchedalmond;
+}
 /* img {
 	margin: 5% 11%;
 	width: 45%;
@@ -49,10 +54,6 @@ h1 {
 button {
 	height: 50px;
 	width: 100%;
-}
-
-h2 {
-	color: whitesmoke;
 }
 
 hr {
@@ -155,10 +156,10 @@ article.modal-img {
 	width: 45%;
 }
 
-.p1-score-heading,
-.p2-score-heading {
+/* .p1-deck-total-heading,
+.p2-deck-total-heading {
 	color: blanchedalmond;
-}
+} */
 
 .p1Card-img,
 .p2Card-img {
@@ -170,4 +171,8 @@ article.modal-img {
 	justify-content: space-between;
 	margin: 5%;
 	width: 100%;
+}
+
+.p1-score-article {
+	border-right: 2px solid whitesmoke;
 }
