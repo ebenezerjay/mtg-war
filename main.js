@@ -7,6 +7,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 0,  
 		src: 'images/alpha-myr.jpg',
+		color: "#C8C5C5",
 	},
 	{
 		name: "Barony Vampire",
@@ -14,6 +15,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 1,  
 		src: 'images/barony-vampire.jpg',
+		color: "black",
 	},
 	{
 		name: "Bog Stomper",
@@ -21,6 +23,7 @@ const fullDeck = [
 		toughness: 5,
 		number: 2, 
 		src: "images/bogstomper.jpg",
+		color: "black",
 	},
 	{
 		name: "Centaur Courser",
@@ -28,6 +31,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 3,
 		src: "images/centaur-courser.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Dross Crocodile",
@@ -35,6 +39,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 4,
 		src: "images/dross-crocodile.jpg",
+		color: "black",
 	},
 	{
 		name: "Earth Elemental",
@@ -42,6 +47,7 @@ const fullDeck = [
 		toughness: 5,
 		number: 5,
 		src: "images/earth-elemental.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Enormous Baloth",
@@ -49,6 +55,7 @@ const fullDeck = [
 		toughness: 7,
 		number: 6,
 		src: "images/enormous-baloth.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Field Creeper",
@@ -56,6 +63,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 7,
 		src: "images/field-creeper.jpg",
+		color: "#C8C5C5",
 	},
 	{
 		name: "Fire Elemental",
@@ -63,6 +71,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 8,
 		src: "images/fire-elemental.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Fortress Crab",
@@ -70,6 +79,7 @@ const fullDeck = [
 		toughness: 6,
 		number: 9,
 		src: "images/fortress-crab.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Fugitive Wizard",
@@ -77,6 +87,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 10,
 		src: "images/fugitive-wizard.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Goblin Piker",
@@ -84,6 +95,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 11,
 		src: "images/goblin-piker.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Grizzly Bears",
@@ -91,6 +103,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 12,
 		src: "images/grizzly-bears.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Hill Giant",
@@ -98,6 +111,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 13,
 		src: "images/hill-giant.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Lumingrid Warden",
@@ -105,6 +119,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 14,
 		src: "images/lumengrid-warden.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Mass of Ghouls",
@@ -112,6 +127,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 15,
 		src: "images/mass-of-ghouls.jpg",
+		color: "black",
 	},
 	{
 		name: "Omega Myr",
@@ -119,6 +135,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 16,
 		src: "images/omega-myr.jpg",
+		color: "#C8C5C5",
 	},
 	{
 		name: "Spined Wurm",
@@ -126,6 +143,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 17,
 		src: "images/spined-wurm.jpg",
+		color: "#C8C5C5",
 	},
 	{
 		name: "Vorstclaw",
@@ -133,6 +151,7 @@ const fullDeck = [
 		toughness: 7,
 		number: 18,
 		src: "images/vorstclaw.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Yoked Ox",
@@ -140,6 +159,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 19,
 		src: "images/yoked-ox.jpg",
+		color: "white",
 	},
 	{
 		name: "Ancient Crab",
@@ -147,6 +167,7 @@ const fullDeck = [
 		toughness: 5,
 		number: 20,
 		src: "images/ancient-crab.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Canopy Gorger",
@@ -154,6 +175,7 @@ const fullDeck = [
 		toughness: 5,
 		number: 21,
 		src: "images/canopy-gorger.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Axebane Stag",
@@ -161,6 +183,7 @@ const fullDeck = [
 		toughness: 7,
 		number: 22,
 		src: "images/axebane-stag.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Catacomb Slug",
@@ -168,12 +191,14 @@ const fullDeck = [
 		toughness: 6,
 		number: 23,
 		src: "images/catacomb-slug.jpg",
+		color: "black",
 	},{
 		name: "Cobblebrute",
 		power: 5,
 		toughness: 2,
 		number: 24,
 		src: "images/cobblebrute.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Golgari Longlegs",
@@ -181,6 +206,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 25,
 		src: "images/golgari-longlegs.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Coral Merfolk",
@@ -188,6 +214,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 26,
 		src: "images/coral-merfolk.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Craw Wurm",
@@ -195,6 +222,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 27,
 		src: "images/craw-wurm.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Elite Vanguard",
@@ -202,6 +230,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 28,
 		src: "images/elite-vanguard.jpg",
+		color: "white",
 	},
 	{
 		name: "Horned Turtle",
@@ -209,6 +238,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 29,
 		src: "images/horned-turtle.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Runeclaw Bear",
@@ -216,6 +246,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 30,
 		src: "images/runeclaw-bear.jpg",
+		color: "#2D781E",
 	},
 	{
 		name: "Seige Mastadon",
@@ -223,6 +254,7 @@ const fullDeck = [
 		toughness: 5,
 		number: 31,
 		src: "images/siege-mastodon.jpg",
+		color: "white",
 	},
 	{
 		name: "Silvercoat Lion",
@@ -230,6 +262,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 32,
 		src: "images/silvercoat-lion.jpg",
+		color: "white",
 	},
 	{
 		name: "Giant Octopus",
@@ -237,6 +270,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 33,
 		src: "images/giant-octopus.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Warpath Ghoul",
@@ -244,6 +278,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 34,
 		src: "images/warpath-ghoul.jpg",
+		color: "black",
 	},
 	{
 		name: "Zombie Goliath",
@@ -251,6 +286,7 @@ const fullDeck = [
 		toughness: 3,
 		number: 35,
 		src: "images/zombie-goliath.jpg",
+		color: "black",
 	},
 	{
 		name: "Balduvian Barbarians",
@@ -258,6 +294,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 36,
 		src: "images/balduvian-barbarians.jpg",
+		color: "#781E1E",
 	},
 	{
 		name: "Coral Eel",
@@ -265,6 +302,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 37,
 		src: "images/coral-eel.jpg",
+		color: "#1442FF",
 	},
 	{
 		name: "Eager Cadet",
@@ -272,6 +310,7 @@ const fullDeck = [
 		toughness: 1,
 		number: 38,
 		src: "images/eager-cadet.jpg",
+		color: "white",
 	},
 	{
 		name: "Giant Cockroach",
@@ -279,6 +318,7 @@ const fullDeck = [
 		toughness: 2,
 		number: 39,
 		src: "images/giant-cockroach.jpg",
+		color: "black",
 	},
 ];
 // console.log(fullDeck);
@@ -290,6 +330,8 @@ const newGameButton = $("#new-game-button-id");
 const p1BackImg = $("#p1-back-img-id");
 const p2BackImg = $("#p2-back-img-id");
 const modalContainer = document.getElementById("modal-container-id");
+const p1ModalContainer = document.getElementById("p1-modal-container-id");
+const p2ModalContainer = document.getElementById("p2-modal-container-id");
 const hideModalButton = document.getElementById("hide-modal-btn-id");
 const bottomSection = $(".bottom-section");
 const hideDirectionBtn = $("#par1-id");
@@ -394,6 +436,10 @@ showDirectionsBTN2.on('click', function() {
 hideModalButton.addEventListener('click', function() {
 	modalContainer.style.display = "none";
 	hideModalButton.style.display = "none";
+	let oldP1CardImg = document.querySelector(".modal-img1");
+	let oldP2CardImg = document.querySelector(".modal-img2");
+	$(oldP1CardImg).remove();
+	$(oldP2CardImg).remove();
 });
 
 // functions
@@ -431,6 +477,7 @@ function matchNumbers() {
 function compareCreatures() {
 	showModalImages();
 	let explainerParagraph = document.querySelector(".modal-text");
+	setBackgroundColor();
 	if (tempFightArray[0].power >= tempFightArray[1].toughness && tempFightArray[1].power < tempFightArray[0].toughness) {
 		explainerParagraph.innerHTML = tempFightArray[0].name + "'s " + "power is greater than or equal to " + tempFightArray[1].name + "'s " + " toughness";
 		p1IsWinner();
@@ -456,7 +503,6 @@ function p1IsWinner() {
 
 // when p2 card wins
 function p2IsWinner() {
-
 	p2RoundWinners.push(tempFightArray[0]);
 	p2RoundWinners.push(tempFightArray[1]);
 	tempFightArray.splice(0,2);
@@ -478,22 +524,26 @@ function showModalImages() {
 	let p2CardImg = new Image(225,325);
 	p1CardImg.src = tempFightArray[0].src;
 	p2CardImg.src = tempFightArray[1].src;
-	$("#modal-container-id").append(p1CardImg);
-	$("#modal-container-id").append(p2CardImg);
-	$("article.img").addClass("modal-img");
+	$("#p1-modal-container-id").append(p1CardImg);
+	$("#p2-modal-container-id").append(p2CardImg);
+	$(p1CardImg).addClass("modal-img1");
+	$(p2CardImg).addClass("modal-img2");
 	styleModalImages(p1CardImg,p2CardImg);
 }
 
 // styles the appended images
 function styleModalImages(p1CardImg,p2CardImg) {
 	p1CardImg.style.margin = "auto";
-	p1CardImg.style.position = "absolute";
-	p1CardImg.style.top = "34%";
-	p1CardImg.style.left = "2%";
+	p1CardImg.style.display = "flex";
+	p1CardImg.style.justifyContent = "center";
+	p2CardImg.style.display = "flex";
+	p2CardImg.style.justifyContent = "center";
 	p2CardImg.style.margin = "auto";
-	p2CardImg.style.position = "absolute";
-	p2CardImg.style.top = "34%";
-	p2CardImg.style.left = "69%";
+}
+
+function setBackgroundColor() {
+	p1ModalContainer.style.backgroundColor = tempFightArray[0].color;
+	p2ModalContainer.style.backgroundColor = tempFightArray[1].color;
 }
 
 // appends recently won images and updates score sections
@@ -545,7 +595,6 @@ function getP1UnplayedCount() {
 // calculates and displays the amount of cards already played and won by p1
 function getP1WinnersPileCount() {
 	let p1WinnerPile = p1RoundWinners2.length;
-	console.log(p1WinnerPile);
 	let p1WinnerPileHeading = document.getElementById("p1-winners-pile-heading-id");
 	if (p1WinnerPile > 0) {
 		p1WinnerPileHeading.innerText = "Amount of cards already played/won in player 1's deck " + p1WinnerPile; 
@@ -570,11 +619,11 @@ function getP2UnplayedCount() {
 
 // calculates and displays the amount of cards already played and won by p2
 function getP2WinnersPileCount() {
-	let p2WinnersPile = p2RoundWinners2.length;
-	console.log(p2WinnersPile);
+	// console.log(p2WinnersPile);
+	let p2WinnerPile = p1RoundWinners2.length;
 	let p2WinnersPileHeading = document.getElementById("p2-winners-pile-heading-id");
-	if (p2WinnersPile > 0) {
-		p2WinnersPileHeading.innerText = "Amount of cards already played/won in player 2's deck " + p2WinnersPile;
+	if (p2WinnerPile > 0) {
+		p2WinnersPileHeading.innerText = "Amount of cards already played/won in player 2's deck " + p2WinnerPile;
 	} else {
 		p2WinnersPileHeading.innerText = "";
 	}
@@ -621,7 +670,6 @@ function p1BackToFull() {
 		fullDeck.push(cards1);
 	});
 	fullDeck.push(tempFightArray[0]);
-	console.log(p1RoundWinners2);
 }
 
 // re-adds p2 decks to full deck
@@ -633,7 +681,6 @@ function p2BackToFull() {
 		fullDeck.push(cards2);
 	});
 	fullDeck.push(tempFightArray[1]);
-	console.log(p2RoundWinners2);
 }
 
 // resets both players arrays to empty
@@ -643,7 +690,6 @@ function resetArrays() {
 	tempFightArray.splice(0,2);
 	p2RoundWinners2 = [];
 	p2Deck = [];
-	console.log(p1RoundWinners2,p2RoundWinners2);
 }
 
 // adds the removed score sections back to the dom
@@ -655,7 +701,6 @@ function reAddScoreSections() {
 	// let p1ImgCont = $(".p1-image-container");
 	// let p2ImgCont = $(".p2-image-container");
 
-	console.log(p1ImageContainer,p2ImageContainer);
 }
 
 // sets up both players winning piles for next round

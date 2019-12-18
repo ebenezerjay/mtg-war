@@ -87,7 +87,6 @@ hr {
 	background: whitesmoke;
 	border: 1px solid red;
 	display: none;
-	justify-content: center;
 	height: 73%;
 	padding: 5px;
 	position: fixed;
@@ -95,6 +94,12 @@ hr {
 	left: 16%;
 	width: 71%;
 	z-index: 0;
+}
+
+.p1-modal-container,
+.p2-modal-container {
+	height: 80%;
+	width: 50%;
 }
 
 .modal-text {
@@ -106,7 +111,9 @@ hr {
 }
 
 .war-count-heading {
-	width: 37%;
+	text-align: center;
+	margin: 0px;
+	width: 100%;
 }
 
 .hide-modal-btn {
@@ -130,9 +137,10 @@ hr {
 	width: 30px;
 }
 
-article.modal-img {
-	display: none;
-}
+/* .modal-img1,
+.modal-img2 {
+	display: flex;
+} */
 
 /* selectors for top section */
 .p2-article {
