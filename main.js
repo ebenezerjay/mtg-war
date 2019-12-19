@@ -143,7 +143,7 @@ const fullDeck = [
 		toughness: 4,
 		number: 17,
 		src: "images/spined-wurm.jpg",
-		color: "#C8C5C5",
+		color: "#2D781E",
 	},
 	{
 		name: "Vorstclaw",
@@ -345,6 +345,9 @@ const p1ScoreSection = $(".p1-score-article");
 const p2ScoreSection = $(".p2-score-article");
 const p1ImageContainer = $(".p1-image-container");
 const p2ImageContainer = $(".p2-image-container");
+let oldP1RecentlyWonImg = document.querySelector(".p1-recently-won-image");
+let oldP2RecentlyWonImg = document.querySelector(".p2-recently-won-image");
+
 
 
 let p1Wins = false;
@@ -407,6 +410,8 @@ newGameButton.on('click', function() {
 	$(newGameButton).prop("disabled", true);
 	$(startGameButton).prop("disabled", false);
 	$(fightButton).prop("disabled", true);
+	removeP1WonCards();
+	removeP2WonCards();
 	resetGame();
 });
 
@@ -552,6 +557,7 @@ function appendP1WonCard() {
 		let p1RecentlyWonImg = new Image(225, 325);
 		p1RecentlyWonImg.src = card.src;
 		$(".p1-image-container").append(p1RecentlyWonImg);
+		$(p1RecentlyWonImg).addClass("p1-recently-won-img");
 		p1RoundWinners2 = p1RoundWinners.concat(p1RoundWinners2);
 		p1RoundWinners = [];
 	});
@@ -563,6 +569,7 @@ function appendP2WonCard() {
 		let p2RecentlyWonImg = new Image(225,325);
 		p2RecentlyWonImg.src = card.src;
 		$(".p2-image-container").append(p2RecentlyWonImg);
+		$(p2RecentlyWonImg).addClass("p2-recently-won-img");
 		p2RoundWinners2 = p2RoundWinners.concat(p2RoundWinners2);
 		p2RoundWinners = [];
 	});
@@ -656,9 +663,16 @@ function resetGame() {
 	p2BackToFull();
 	resetArrays();
 	getDeckCounts();
-	p1ImageContainer.remove();
-	p2ImageContainer.remove();
-	reAddScoreSections();
+	// reAddScoreSections();
+}
+
+// removes won cards from dom for new game or pile reset
+function removeP1WonCards() {
+	$(p1ImageContainer).empty();
+}
+
+function removeP2WonCards() {
+	$(p2ImageContainer).empty();
 }
 
 // re-adds p1 decks to full deck
@@ -694,18 +708,18 @@ function resetArrays() {
 
 // adds the removed score sections back to the dom
 function reAddScoreSections() {
-	$(".p1-score-article").append("<div></div>");
-	$(".p2-score-article").append("<div></div>");
-	$("div").addClass("p1-image-container");
-	$("div").addClass("p2-image-container");
+	// $(".p1-score-article").append("<div></div>");
+	// $(".p2-score-article").append("<div></div>");
+	// $("div").addClass("p1-image-container");
+	// $("div").addClass("p2-image-container");
 	// let p1ImgCont = $(".p1-image-container");
 	// let p2ImgCont = $(".p2-image-container");
-
 }
 
 // sets up both players winning piles for next round
 function resetPiles(ranCard1,ranCard2) {
 	if (p1Deck.length === 0) {
+		removeP1WonCards();
 		winCon();
 		p1Deck = p1RoundWinners2.concat(p1Deck);
 		p1RoundWinners2 = [];
@@ -714,6 +728,7 @@ function resetPiles(ranCard1,ranCard2) {
 		tempFightArray.push(ranCard1);
 	} 
 	if (p2Deck.length === 0) {
+		removeP2WonCards();
 		winCon();
 		p2Deck = p2RoundWinners2.concat(p2Deck);
 		p2RoundWinners2 = [];
