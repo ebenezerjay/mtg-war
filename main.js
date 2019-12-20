@@ -539,13 +539,29 @@ function showModalImages() {
 // styles the appended images
 function styleModalImages(p1CardImg,p2CardImg) {
 	p1CardImg.style.margin = "auto";
-	p1CardImg.style.display = "flex";
-	p1CardImg.style.justifyContent = "center";
-	p2CardImg.style.display = "flex";
-	p2CardImg.style.justifyContent = "center";
 	p2CardImg.style.margin = "auto";
+	window.setTimeout(modalTransitsons,500,p1CardImg,p2CardImg);
+	window.setTimeout(addAudio,1500);
 }
 
+// transitions styling for both cards in modal 
+function modalTransitsons(p1CardImg,p2CardImg) {
+	p1CardImg.style.transition = "padding-left linear 1s";
+	p2CardImg.style.transition = "padding-right linear 1s";
+	p1CardImg.style.paddingLeft = "44%";
+	p2CardImg.style.paddingRight = "44%";
+}
+
+function addAudio() {
+	let fightAudio = document.querySelector("#fight-audio-id");
+	window.setTimeout(function() {
+		let dieAudio = document.querySelector("#die-audio-id");
+		dieAudio.play();
+	},1000);
+	fightAudio.play();
+}
+
+// sets background colors for modal images 
 function setBackgroundColor() {
 	p1ModalContainer.style.backgroundColor = tempFightArray[0].color;
 	p2ModalContainer.style.backgroundColor = tempFightArray[1].color;
