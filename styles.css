@@ -46,10 +46,6 @@ h1 {
 h2 {
 	color: blanchedalmond;
 }
-/* img {
-	margin: 5% 11%;
-	width: 45%;
-} */
 
 button {
 	height: 50px;
@@ -102,6 +98,22 @@ hr {
 	width: 50%;
 }
 
+/* .modal-img1 {
+	padding-left: 44%;
+}
+
+.modal-img2 {
+	padding-right: 44%;
+} */
+
+/* .modal-img1:hover {
+	padding-left: 55%;
+}
+
+.modal-img2:hover {
+	padding-right: 57%;
+} */
+
 .modal-text {
 	color: black;
 	height: fit-content;
@@ -137,11 +149,6 @@ hr {
 	width: 30px;
 }
 
-/* .modal-img1,
-.modal-img2 {
-	display: flex;
-} */
-
 /* selectors for top section */
 .p2-article {
 	justify-content: flex-end;
@@ -163,11 +170,6 @@ hr {
 	margin: 5% 11%;
 	width: 45%;
 }
-
-/* .p1-deck-total-heading,
-.p2-deck-total-heading {
-	color: blanchedalmond;
-} */
 
 .p1Card-img,
 .p2Card-img {
