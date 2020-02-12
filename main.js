@@ -620,7 +620,7 @@ function getP1WinnersPileCount() {
 	let p1WinnerPile = p1RoundWinners2.length;
 	let p1WinnerPileHeading = document.getElementById("p1-winners-pile-heading-id");
 	if (p1WinnerPile > 0) {
-		p1WinnerPileHeading.innerText = "Amount of cards already played/won in player 1's deck " + p1WinnerPile; 
+		p1WinnerPileHeading.innerText = "Amount of cards already played or won in player 1's deck " + p1WinnerPile; 
 	} else {
 		p1WinnerPileHeading.innerText = "";
 	}
@@ -646,7 +646,7 @@ function getP2WinnersPileCount() {
 	let p2WinnerPile = p1RoundWinners2.length;
 	let p2WinnersPileHeading = document.getElementById("p2-winners-pile-heading-id");
 	if (p2WinnerPile > 0) {
-		p2WinnersPileHeading.innerText = "Amount of cards already played/won in player 2's deck " + p2WinnerPile;
+		p2WinnersPileHeading.innerText = "Amount of cards already played or won in player 2's deck " + p2WinnerPile;
 	} else {
 		p2WinnersPileHeading.innerText = "";
 	}
